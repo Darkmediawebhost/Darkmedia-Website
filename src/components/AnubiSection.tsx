@@ -101,8 +101,9 @@ const ParticleText = ({ texts }: { texts: string[] }) => {
       const maxLineLength = Math.max(...lines.map(l => l.length));
       
       // Responsive font size calculation (constrained by width and height)
+      const widthFactor = canvas.width < 768 ? 0.75 : 0.55;
       let fontSize = Math.min(
-        canvas.width / (maxLineLength * 0.55), 
+        canvas.width / (maxLineLength * widthFactor), 
         canvas.height / (lines.length * 1.5), 
         140
       );
@@ -205,7 +206,8 @@ const ParticleText = ({ texts }: { texts: string[] }) => {
 
 export default function AnubiSection() {
   return (
-    <section className="relative w-full h-[85vh] sm:h-[90vh] min-h-[500px] sm:min-h-[600px] bg-[#030303] text-white font-mono overflow-hidden flex flex-col justify-between p-4 sm:p-12 mt-6 sm:mt-12 rounded-[1.5rem] sm:rounded-[3rem] mx-auto max-w-[1400px]">
+    <div className="w-full px-3 sm:px-0">
+      <section className="relative w-full h-[75vh] sm:h-[90vh] min-h-[450px] sm:min-h-[600px] bg-[#030303] text-white font-mono overflow-hidden flex flex-col justify-between p-5 sm:p-12 mt-0 sm:mt-12 rounded-[2rem] sm:rounded-[3rem] mx-auto max-w-[1400px]">
       
       {/* Subtle background gradient / glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none"></div>
@@ -233,7 +235,7 @@ export default function AnubiSection() {
       </div>
 
       {/* Center Canvas / Content */}
-      <div className="absolute inset-0 z-0 cursor-crosshair">
+      <div className="absolute inset-0 z-0 cursor-crosshair sm:mt20">
         <ParticleText texts={[
           "DARK MEDIA",
           "WEB\nDEVELOPMENT",
@@ -282,5 +284,6 @@ export default function AnubiSection() {
         </div>
       </div>
     </section>
+    </div>
   );
 }

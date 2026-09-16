@@ -47,13 +47,15 @@ export default function InstagramSection() {
         <div className="flex lg:hidden w-full justify-center -mt-[140px] md:-mt-[180px] mb-8 relative z-20 pointer-events-none">
           <div className={`relative transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-20 scale-90'}`}>
             <div className="animate-float-mobile">
-              <Image 
-                src="/assets/img/Mobile.png" 
-                alt="Dark Media Instagram Mobile" 
-                width={500}
-                height={1000}
-                className="w-[260px] md:w-[320px] max-w-none h-auto object-contain drop-shadow-[0_40px_60px_rgba(0,0,0,0.25)]"
-              />
+              <div className="overflow-hidden h-[350px] md:h-[450px]">
+                <Image 
+                  src="/assets/img/Mobile.png" 
+                  alt="Dark Media Instagram Mobile" 
+                  width={500}
+                  height={1000}
+                  className="w-[260px] md:w-[320px] max-w-none h-auto object-contain drop-shadow-[0_40px_60px_rgba(0,0,0,0.25)]"
+                />
+              </div>
             </div>
             {/* Mobile Floating Social Badge */}
             <div className={`absolute top-[25%] right-[-10%] md:right-[-15%] bg-white/90 backdrop-blur-md rounded-2xl p-3 shadow-2xl flex items-center gap-2 animate-pulse-slow pointer-events-auto transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`}>

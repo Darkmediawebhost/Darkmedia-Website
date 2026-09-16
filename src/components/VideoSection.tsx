@@ -49,21 +49,21 @@ export default function VideoSection() {
   };
 
   return (
-    <section ref={sectionRef} className="w-full max-w-[1400px] mx-auto px-6 py-24 flex flex-col items-center relative z-10 overflow-hidden -mt-22">
+    <section ref={sectionRef} className="w-full max-w-[1400px] mx-auto px-3 sm:px-6 py-16 sm:py-24 flex flex-col items-center relative z-10 overflow-hidden -mt-22">
       
       {/* Background Ambient Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-[80%] h-[80%] max-w-4xl bg-blue-300/20 rounded-full blur-[120px] opacity-60 pointer-events-none"></div>
 
-      <div className="w-full max-w-4xl text-center mb-16 relative">
+      <div className="w-full max-w-4xl text-center mb-12 sm:mb-16 relative px-2 sm:px-0">
         <h2 
-          className={`text-4xl md:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 mb-6 transition-all duration-1000 ease-out ${
+          className={`text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 mb-4 sm:mb-6 transition-all duration-1000 ease-out ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
           Experience the Vision
         </h2>
         <p 
-          className={`text-lg md:text-xl text-gray-500 font-medium max-w-2xl mx-auto transition-all duration-1000 delay-200 ease-out ${
+          className={`text-base sm:text-lg md:text-xl text-gray-500 font-medium max-w-2xl mx-auto transition-all duration-1000 delay-200 ease-out ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
@@ -72,7 +72,7 @@ export default function VideoSection() {
       </div>
 
       <div 
-        className={`relative w-full max-w-[1400px] rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2)] group ring-1 ring-gray-900/10 bg-black transition-all duration-1000 delay-400 ease-out hover:shadow-[0_20px_60px_-12px_rgba(0,0,0,0.3)] ${
+        className={`relative w-full max-w-[1400px] rounded-3xl sm:rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2)] group ring-1 ring-gray-900/10 bg-black transition-all duration-1000 delay-400 ease-out hover:shadow-[0_20px_60px_-12px_rgba(0,0,0,0.3)] ${
           isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
         }`}
       >

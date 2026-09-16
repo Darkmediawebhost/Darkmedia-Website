@@ -64,22 +64,22 @@ export default function Hero() {
       <div className="w-full max-w-[1400px] mx-auto px-6 flex flex-col items-start text-left relative z-10">
 
         {/* Title */}
-        <h1 className="text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5.5rem] leading-[1.1] font-extrabold tracking-tight max-w-[1100px] mt-8 md:mt-20">
+        <h1 className="text-4xl sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5.5rem] leading-[1.2] sm:leading-[1.1] font-extrabold tracking-tight max-w-[1100px] mt-24 sm:mt-16 md:mt-20">
         <SlideUpText delay={0.3}>
-          <span className="text-transparent bg-clip-text bg-gradient-to-br from-gray-900 to-gray-600">
+          <span className="text-transparent bg-clip-text bg-gradient-to-br from-gray-900 to-gray-600 block">
             Expert Branding,
           </span>
         </SlideUpText>
         <SlideUpText delay={0.4}>
-          <span className="text-transparent bg-clip-text bg-gradient-to-br from-gray-900 to-gray-600">
-            Web & Video Solutions
+          <span className="text-transparent bg-clip-text bg-gradient-to-br from-gray-900 to-gray-600 block">
+            Web & Video <span className="hidden sm:inline">Solutions</span>
           </span>
         </SlideUpText>
         <SlideUpText delay={0.5}>
-          <span className="text-transparent bg-clip-text bg-gradient-to-br from-gray-900 to-gray-600">
-            Across{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-br from-gray-900 to-gray-600 block sm:inline">
+            <span className="sm:hidden">Solutions </span>Across{" "}
           </span>
-          <span className="relative inline-flex items-center text-[#11132d] ml-2 align-bottom h-[1.2em] font-black uppercase tracking-tight">
+          <span className="relative flex sm:inline-flex items-center text-[#11132d] sm:ml-2 align-bottom h-[1.2em] font-black uppercase tracking-tight mt-1 sm:mt-0">
             <Typewriter
               options={{
                 strings: locations,
@@ -106,13 +106,13 @@ export default function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1, duration: 0.8 }}
-        className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6"
+        className="mt-12 w-full sm:w-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6"
       >
-        <Link href="/contact-us" className="inline-flex items-center gap-3 bg-[#11132d] text-white px-8 py-4 rounded-full text-base font-medium hover:bg-gray-900 hover:shadow-[0_10px_30px_rgba(17,19,45,0.3)] hover:-translate-y-1 transition-all duration-300 group">
+        <Link href="/contact-us" className="inline-flex justify-center items-center gap-3 bg-[#11132d] text-white px-8 py-4 rounded-full text-base font-medium hover:bg-gray-900 hover:shadow-[0_10px_30px_rgba(17,19,45,0.3)] hover:-translate-y-1 transition-all duration-300 group w-full sm:w-auto shadow-md sm:shadow-none">
           Start Your Project 
           <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
         </Link>
-        <Link href="/services" className="inline-flex items-center gap-3 text-[#11132d] px-8 py-4 rounded-full text-base font-medium hover:bg-gray-50 transition-all duration-300 group border border-transparent hover:border-gray-200">
+        <Link href="/services" className="inline-flex justify-center items-center gap-3 text-[#11132d] px-8 py-4 rounded-full text-base font-medium hover:bg-gray-50 transition-all duration-300 group border border-gray-200 sm:border-transparent hover:border-gray-200 w-full sm:w-auto bg-white sm:bg-transparent shadow-sm sm:shadow-none">
           Explore Services
         </Link>
       </motion.div>
@@ -122,25 +122,25 @@ export default function Hero() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.2, duration: 1 }}
-        className="w-full mt-20 overflow-hidden relative border-y border-gray-200/50 py-8 bg-white/30 backdrop-blur-sm rounded-3xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.8)]"
+        className="w-full mt-16 sm:mt-20 overflow-hidden relative border-y border-gray-200/50 py-8 bg-white/30 backdrop-blur-sm rounded-3xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.8)]"
       >
-        <div className="text-left text-xs font-bold tracking-[0.2em] text-gray-400 uppercase mb-8 ml-8">Trusted by industry leaders</div>
-        <div className="w-[200%] sm:w-[max-content] flex animate-slide items-center gap-16 pr-16">
+        <div className="text-center sm:text-left text-xs font-bold tracking-[0.2em] text-gray-500 sm:text-gray-400 uppercase mb-6 sm:mb-8 ml-0 sm:ml-8">Trusted by industry leaders</div>
+        <div className="w-[300%] sm:w-[max-content] flex animate-slide items-center gap-10 sm:gap-16 pr-10 sm:pr-16">
           {[...clientLogos, ...clientLogos].map((logo, i) => (
-            <div key={i} className="flex-shrink-0 opacity-40 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300 ease-in-out cursor-pointer relative h-12 w-32 flex items-center justify-center hover:scale-105">
+            <div key={i} className="flex-shrink-0 opacity-80 sm:opacity-40 hover:opacity-100 grayscale-0 sm:grayscale hover:grayscale-0 transition-all duration-300 ease-in-out cursor-pointer relative h-14 w-28 sm:h-12 sm:w-32 flex items-center justify-center hover:scale-105">
               <Image 
                 src={`/assets/clientslogo/${logo}`} 
                 alt={`Client Logo ${i}`} 
                 fill
                 className="object-contain drop-shadow-sm"
-                sizes="128px"
+                sizes="(max-width: 640px) 112px, 128px"
               />
             </div>
           ))}
         </div>
         {/* Gradient fades for the edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#FAFAFA] to-transparent pointer-events-none z-10 rounded-l-3xl"></div>
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#FAFAFA] to-transparent pointer-events-none z-10 rounded-r-3xl"></div>
+        <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-32 bg-gradient-to-r from-[#FAFAFA] to-transparent pointer-events-none z-10 rounded-l-3xl"></div>
+        <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-32 bg-gradient-to-l from-[#FAFAFA] to-transparent pointer-events-none z-10 rounded-r-3xl"></div>
       </motion.div>
 
       </div>

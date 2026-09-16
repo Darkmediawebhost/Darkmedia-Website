@@ -22,10 +22,10 @@ export default function AboutUsPage() {
    
     <main className="w-full min-h-screen bg-white pt-24 pb-12 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
       {/* Hero Section Container */}
-      <div className="w-full max-w-[1400px] h-[75vh] min-h-[500px] max-h-[800px] bg-[#EBEBEB] rounded-[2rem] sm:rounded-[3rem] px-6 flex flex-col items-center justify-center text-center relative overflow-hidden mt-6">
+      <div className="w-full max-w-[1400px] h-[50vh] sm:h-[75vh] min-h-[350px] sm:min-h-[500px] max-h-[800px] bg-[#EBEBEB] rounded-[2rem] sm:rounded-[3rem] px-4 sm:px-6 flex flex-col items-center justify-center text-center relative overflow-hidden mt-6">
         
         {/* AeroShards Background */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 opacity-40 sm:opacity-100">
           <AeroShards
             backgroundColor="#EBEBEB"
             shardColor="#896ABD"
@@ -62,7 +62,7 @@ export default function AboutUsPage() {
         <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-white/40 to-transparent pointer-events-none"></div>
 
         {/* Hero Text */}
-        <h1 className="text-[2.75rem] sm:text-5xl md:text-6xl lg:text-[5.5rem] leading-[1.1] font-bold text-[#111111] tracking-tight z-10 max-w-4xl mx-auto">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[5.5rem] leading-[1.2] sm:leading-[1.1] font-bold text-[#111111] tracking-tight z-10 max-w-4xl mx-auto px-2 sm:px-0">
           More than designers.
           <br />
           Problem solvers. 
@@ -78,8 +78,9 @@ export default function AboutUsPage() {
       <TrustedWorldwideSection />
       <FAQSection />
 
-      <AnubiSection />
+     
     </main>
+     <AnubiSection />
     <Footer/>
 
      </>
