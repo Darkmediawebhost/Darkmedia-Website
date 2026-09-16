@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { SlideUpText } from "./SlideUpText";
 import { TextReveal } from "./TextReveal";
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 
 const locations = ["Mangalore", "India", "Dubai", "Saudi Arabia", "Qatar", "Kuwait"];
 
@@ -21,6 +22,47 @@ const clientLogos = [
 ];
 
 export default function Hero() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    let animationId: number;
+    let isDown = false;
+
+    const onDown = () => (isDown = true);
+    const onUp = () => (isDown = false);
+
+    el.addEventListener("pointerdown", onDown);
+    el.addEventListener("pointerup", onUp);
+    el.addEventListener("pointerleave", onUp);
+    el.addEventListener("touchstart", onDown);
+    el.addEventListener("touchend", onUp);
+
+    const scroll = () => {
+      if (!isDown) {
+        el.scrollLeft += 0.8; // Smooth and relatively slow speed
+        // Reset when reaching halfway to create infinite loop effect
+        if (el.scrollLeft >= el.scrollWidth / 2) {
+          el.scrollLeft = 0;
+        }
+      }
+      animationId = requestAnimationFrame(scroll);
+    };
+
+    animationId = requestAnimationFrame(scroll);
+
+    return () => {
+      cancelAnimationFrame(animationId);
+      el.removeEventListener("pointerdown", onDown);
+      el.removeEventListener("pointerup", onUp);
+      el.removeEventListener("pointerleave", onUp);
+      el.removeEventListener("touchstart", onDown);
+      el.removeEventListener("touchend", onUp);
+    };
+  }, []);
+
   return (
     <section className="w-full relative z-10 min-h-[100svh] md:min-h-[95vh] flex flex-col justify-center mt-[-80px] pt-32 md:pt-40 pb-20 overflow-hidden">
       {/* Subtle Premium Grid Background */}
@@ -118,6 +160,7 @@ export default function Hero() {
       </motion.div>
       
       {/* Logos Row */}
+      {/* Logos Row */}
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -125,21 +168,24 @@ export default function Hero() {
         className="w-full mt-16 sm:mt-20 overflow-hidden relative border-y border-gray-200/50 py-8 bg-white/30 backdrop-blur-sm rounded-3xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.8)]"
       >
         <div className="text-center sm:text-left text-xs font-bold tracking-[0.2em] text-gray-500 sm:text-gray-400 uppercase mb-6 sm:mb-8 ml-0 sm:ml-8">Trusted by industry leaders</div>
-        <div className="w-[300%] sm:w-[max-content] flex animate-slide items-center gap-10 sm:gap-16 pr-10 sm:pr-16">
+        <div 
+          ref={scrollRef}
+          className="w-full flex items-center gap-10 sm:gap-16 overflow-x-auto px-8 sm:px-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden select-none"
+        >
           {[...clientLogos, ...clientLogos].map((logo, i) => (
-            <div key={i} className="flex-shrink-0 opacity-80 sm:opacity-40 hover:opacity-100 grayscale-0 sm:grayscale hover:grayscale-0 transition-all duration-300 ease-in-out cursor-pointer relative h-14 w-28 sm:h-12 sm:w-32 flex items-center justify-center hover:scale-105">
+            <div key={i} className="flex-shrink-0 opacity-80 sm:opacity-40 hover:opacity-100 grayscale-0 sm:grayscale hover:grayscale-0 transition-all duration-300 ease-in-out cursor-grab active:cursor-grabbing sm:cursor-pointer relative h-14 w-28 sm:h-12 sm:w-32 flex items-center justify-center hover:scale-105">
               <Image 
                 src={`/assets/clientslogo/${logo}`} 
                 alt={`Client Logo ${i}`} 
                 fill
-                className="object-contain drop-shadow-sm"
+                className="object-contain drop-shadow-sm pointer-events-none"
                 sizes="(max-width: 640px) 112px, 128px"
               />
             </div>
           ))}
         </div>
         {/* Gradient fades for the edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-32 bg-gradient-to-r from-[#FAFAFA] to-transparent pointer-events-none z-10 rounded-l-3xl"></div>
+        <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-32 bg-gradient-to-r from-[#FAFAFA] to-transparent pointer-events-none z-10 rounded-l-3xl"></div>
         <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-32 bg-gradient-to-l from-[#FAFAFA] to-transparent pointer-events-none z-10 rounded-r-3xl"></div>
       </motion.div>
 

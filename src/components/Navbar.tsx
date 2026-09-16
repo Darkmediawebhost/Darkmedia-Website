@@ -52,9 +52,9 @@ export default function Navbar() {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out ${isScrolled ? "py-4" : "py-6"}`}>
-        <div className={`mx-auto max-w-[1400px] px-6 md:px-8 transition-all duration-500 ease-in-out`}>
-          <nav className={`w-full flex items-center justify-between transition-all duration-500 ${isScrolled && !isMobileMenuOpen ? "bg-white/80 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-white/50 rounded-full px-6 py-3" : "bg-transparent px-0 py-0"}`}>
+      <header className={`fixed top-0 left-0 w-full z-50 flex justify-center transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${isScrolled ? "py-3 sm:py-4" : "py-6"}`}>
+        <div className={`transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] w-full ${isScrolled && !isMobileMenuOpen ? "max-w-5xl px-3 sm:px-6" : "max-w-[1400px] px-6 md:px-8"}`}>
+          <nav className={`w-full flex items-center justify-between transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${isScrolled && !isMobileMenuOpen ? "bg-white/90 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] border border-gray-200/50 rounded-[2rem] px-4 sm:px-8 py-2 sm:py-3" : "bg-transparent px-0 py-0"}`}>
             {/* Logo */}
             <Link href="/" className="flex items-center group relative z-[60]">
               <Image 
@@ -62,7 +62,7 @@ export default function Navbar() {
                 alt="Dark Media Logo" 
                 width={180} 
                 height={60} 
-                className="invert h-auto w-auto max-h-[36px] md:max-h-[40px] object-contain group-hover:scale-105 transition-transform duration-300"
+                className={`invert h-auto w-auto object-contain transition-all duration-500 ${isScrolled ? "max-h-[30px] md:max-h-[34px]" : "max-h-[36px] md:max-h-[40px] group-hover:scale-105"}`}
                 priority
               />
             </Link>

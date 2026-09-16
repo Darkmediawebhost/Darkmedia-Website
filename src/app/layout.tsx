@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
@@ -18,7 +19,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${bricolage.variable} h-full antialiased`}
     >
-      <body className={`${bricolage.className} min-h-full flex flex-col`}>{children}</body>
+      <body className={`${bricolage.className} min-h-full flex flex-col`}>
+        {children}
+        <ScrollToTop />
+      </body>
     </html>
   );
 }
