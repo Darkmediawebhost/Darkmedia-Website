@@ -124,9 +124,11 @@ export default function FAQSection() {
                   muted 
                   playsInline 
                   className="w-full h-full object-cover opacity-80 mix-blend-screen scale-105 group-hover:scale-110 transition-transform duration-1000 ease-out"
-                >
+                 preload="none">
                   <source src="https://cdn.dribbble.com/userupload/11267104/file/original-4c472c9a997ef0e854999f8d167f2ec6.mp4" type="video/mp4" />
-                </video>
+                
+          <track kind="captions" srcLang="en" label="English" default />
+        </video>
                 {/* Gradient Overlay for text readability */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#101828] via-[#101828]/60 to-transparent"></div>
               </div>

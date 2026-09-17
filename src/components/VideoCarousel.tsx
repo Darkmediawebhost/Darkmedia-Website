@@ -135,7 +135,9 @@ export function VideoCarousel() {
                     onEnded={isCenter ? handleVideoEnded : undefined}
                     onTimeUpdate={isCenter ? handleTimeUpdate : undefined}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                  />
+                  >
+                    <track kind="captions" srcLang="en" label="English" default />
+                  </video>
                   
                   {isCenter && (
                     <>

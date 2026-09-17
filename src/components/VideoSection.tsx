@@ -84,9 +84,12 @@ export default function VideoSection() {
           muted={isMuted}
           loop
           playsInline
+          preload="none"
           className="w-full h-auto object-cover aspect-video cursor-pointer opacity-95 group-hover:opacity-100 transition-opacity duration-500"
           onClick={togglePlay}
-        />
+        >
+          <track kind="captions" srcLang="en" label="English" default />
+        </video>
         
         {/* Controls Overlay - Always neat & visible on mobile screens */}
         <div 

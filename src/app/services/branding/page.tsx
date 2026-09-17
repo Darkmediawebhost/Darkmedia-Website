@@ -101,9 +101,11 @@ export default function BrandingPage() {
                   muted 
                   playsInline
                   className="absolute inset-0 w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
-                >
+                 preload="none">
                   <source src="https://www.mydbucket.com/wp-content/uploads/2024/10/wave.mp4" type="video/mp4" />
-                </video>
+                
+          <track kind="captions" srcLang="en" label="English" default />
+        </video>
               </div>
             </div>
 

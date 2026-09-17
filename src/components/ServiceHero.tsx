@@ -31,8 +31,10 @@ export const ServiceHero = ({
           muted 
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
-        >
+         preload="none">
           <source src={videoSrc} type="video/mp4" />
+        
+          <track kind="captions" srcLang="en" label="English" default />
         </video>
       </motion.div>
       

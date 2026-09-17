@@ -37,9 +37,11 @@ export default function ContactUs() {
             muted 
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
-          >
+           preload="none">
             <source src="https://www.mydbucket.com/wp-content/uploads/2024/10/wave.mp4" type="video/mp4" />
-          </video>
+          
+          <track kind="captions" srcLang="en" label="English" default />
+        </video>
           <div className="absolute inset-0 bg-white/80"></div>
           
           <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">

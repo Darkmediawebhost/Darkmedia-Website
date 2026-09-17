@@ -10,12 +10,14 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-[#FAFAFA] font-sans">
       <Navbar />
-      <Hero />
-      <VideoSection />
-      <ServicesSection />
-      {/* <MissionVisionSection /> */}
-      <InstagramSection />
-      <AnubiSection/>
+      <main id="main-content" className="flex-1">
+        <Hero />
+        <VideoSection />
+        <ServicesSection />
+        {/* <MissionVisionSection /> */}
+        <InstagramSection />
+        <AnubiSection/>
+      </main>
       <Footer />
     </div>
   );
