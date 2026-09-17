@@ -1,0 +1,28 @@
+# Dark Media
+
+> Dark Media is a premier full-service digital agency specializing in Web Development, Strategic Branding, Video Production, SEO & Analytics, and Social Media Management. Serving 400+ brands across India (Mangaluru HQ) and the GCC region (Dubai, Riyadh, Muscat).
+
+## Core Capabilities
+
+- [Web Development](https://www.darkmedia.tech/services/web-development): Modern Next.js e-commerce platforms, corporate websites, and enterprise web applications.
+- [Branding Agency](https://www.darkmedia.tech/services/branding): Visual identity design, brand strategy, typography, guidelines, and corporate rebranding.
+- [Video Production](https://www.darkmedia.tech/services/video-production): High-end corporate films, TV & digital ad commercials, and next-gen AI video production.
+- [SEO & Growth Analytics](https://www.darkmedia.tech/services/seo-analytics): Data-driven organic search strategy, local SEO domination, and technical site performance audits.
+- [Social Media Management](https://www.darkmedia.tech/services/social-media-management): High-ROI performance marketing (Meta, Google, LinkedIn) and viral short-form video reels studio.
+
+## Target Geographies & Regional Hubs
+
+- [Mangaluru Headquarters](https://www.darkmedia.tech/locations/mangaluru): Primary development & creative engineering hub in Karnataka, India.
+- [Dubai Regional Hub](https://www.darkmedia.tech/locations/dubai): Serving UAE enterprises with luxury digital experiences and multi-currency web solutions.
+- [Riyadh Growth Center](https://www.darkmedia.tech/locations/riyadh): Supporting Saudi Vision 2030 corporate initiatives with bilingual media production.
+- [Muscat Agency Center](https://www.darkmedia.tech/locations/muscat): Corporate web development and branding services tailored for Oman enterprises.
+
+## Key Resources
+
+- [Our Work & Portfolio](https://www.darkmedia.tech/work): Case studies for 400+ client projects.
+- [Marketing & Tech Insights](https://www.darkmedia.tech/blog): In-depth strategy guides, technical tutorials, and industry reports.
+- [Request a Quote](https://www.darkmedia.tech/contact-us): Direct agency contact and project inquiry form.
+
+## Detailed Information
+
+- [llms-full.txt](https://www.darkmedia.tech/llms-full.txt): Comprehensive specifications, sub-services breakdown, and agency profile for deep LLM ingestion.

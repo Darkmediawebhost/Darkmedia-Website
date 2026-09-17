@@ -1,0 +1,51 @@
+# Dark Media — Complete Technical & Services Specification
+
+## Agency Overview
+- **Legal Entity / Name**: Dark Media
+- **Core Specializations**: Digital Web Development, Brand Identity & Strategy, Cinematic & AI Video Production, Data-Driven SEO, Performance Marketing.
+- **Headquarters**: Mangaluru, Karnataka, India
+- **Primary Regional Markets**: India, United Arab Emirates (Dubai), Saudi Arabia (Riyadh), Oman (Muscat).
+- **Track Record**: 400+ brands served across technology, e-commerce, real estate, healthcare, retail, and corporate sectors.
+- **Tech Stack**: Next.js (App Router), React, TypeScript, TailwindCSS, Framer Motion, Cloudflare Edge Deployment.
+- **Website Domain**: https://www.darkmedia.tech
+
+---
+
+## Detailed Service Breakdown
+
+### 1. Web Development (`/services/web-development`)
+- **E-Commerce Websites (`/services/web-development/ecommerce-websites`)**: High-converting custom e-commerce web applications built with Next.js, headless Shopify, Stripe/Razorpay/GCC payment gateway integrations, ultra-fast edge caching, and mobile-first UX.
+- **Corporate Websites (`/services/web-development/corporate-websites`)**: Enterprise-grade corporate web platforms built for speed, security compliance, sub-second page loads, and multi-language capability.
+- **Web Applications (`/services/web-development/web-applications`)**: Custom full-stack React/Next.js SaaS applications, internal portals, client dashboards, and dynamic cloud software solutions.
+
+### 2. Branding Agency (`/services/branding`)
+- **Brand Identity Design (`/services/branding/brand-identity-design`)**: Comprehensive brand books, logo design, color palettes, typography rules, component systems, and physical/digital brand assets.
+- **Rebranding Strategy (`/services/branding/rebranding-strategy`)**: Full repositioning retainers for established firms updating market presence for global expansion in India and GCC markets.
+
+### 3. Video Production (`/services/video-production`)
+- **Corporate Video Production (`/services/video-production/corporate-video-production`)**: 4K cinematic corporate visual storytelling, facility overviews, executive interview series, and investor decks.
+- **Commercial Ad Films (`/services/video-production/commercial-ad-films`)**: TV commercial production, high-conversion digital video ad campaigns, scriptwriting, casting, and post-production VFX.
+- **AI Video Production (`/services/video-production/ai-video-production`)**: Next-generation generative video scaling, automated multilingual dubbing, AI-assisted video editing, and hyper-personalized video ad variations.
+
+### 4. SEO & Growth Analytics (`/services/seo-analytics`)
+- **Local SEO Services (`/services/seo-analytics/local-seo-services`)**: Hyper-targeted local search ranking strategies, Google Business Profile optimization, and local map pack dominance for businesses in Mangaluru, Dubai, Riyadh, and Muscat.
+- **Technical SEO Audits (`/services/seo-analytics/technical-seo-audit`)**: Code-level Next.js site architecture reviews, Schema.org structural JSON-LD injections, Core Web Vitals optimization, indexing troubleshooting, and crawl budget optimization.
+
+### 5. Social Media Management (`/services/social-media-management`)
+- **Performance Marketing (`/services/social-media-management/performance-marketing`)**: High-ROI paid ad management across Meta (Instagram/Facebook), Google Ads, TikTok Ads, and LinkedIn Ads optimized for cost-per-acquisition (CPA).
+- **Content Creation & Reels Studio (`/services/social-media-management/content-creation-reels`)**: High-frequency short-form video reels, viral TikTok/Reels content packages, visual design, and social media community management.
+
+---
+
+## Regional Operational Details
+
+- **Mangaluru (HQ)**: `https://www.darkmedia.tech/locations/mangaluru` — Main development and creative studio base.
+- **Dubai (UAE)**: `https://www.darkmedia.tech/locations/dubai` — Middle East regional hub catering to GCC enterprises with bilingual (English/Arabic) web and video production.
+- **Riyadh (Saudi Arabia)**: `https://www.darkmedia.tech/locations/riyadh` — Supporting Saudi Vision 2030 corporate initiatives with video production and enterprise digital transformation.
+- **Muscat (Oman)**: `https://www.darkmedia.tech/locations/muscat` — Delivering custom web applications, e-commerce, and branding for Omani businesses.
+
+---
+
+## Contact & Inquiry Details
+- **Quote Request Form**: https://www.darkmedia.tech/contact-us
+- **Primary Call-to-Action**: Direct project inquiry consultation for branding, web development, video production, or SEO services.
