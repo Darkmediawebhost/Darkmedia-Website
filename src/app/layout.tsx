@@ -10,8 +10,20 @@ const bricolage = Bricolage_Grotesque({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.darkmedia.tech"),
   title: "Dark Media | Expert Branding, Web & Video Solutions",
   description: "Trusted by visionary brands worldwide to craft unforgettable digital experiences and drive meaningful growth.",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
