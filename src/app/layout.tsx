@@ -3,7 +3,16 @@ import { Bricolage_Grotesque } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import ScrollToTop from "@/components/ScrollToTop";
-import { OG_IMAGE_PATH, seoPages, SITE_NAME, SITE_URL } from "@/lib/seo";
+import {
+  OG_IMAGE_ALT,
+  OG_IMAGE_HEIGHT,
+  OG_IMAGE_PATH,
+  OG_IMAGE_TYPE,
+  OG_IMAGE_WIDTH,
+  seoPages,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/seo";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
@@ -29,6 +38,29 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
+  },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    locale: "en_IN",
+    url: SITE_URL,
+    title: seoPages.home.title,
+    description: seoPages.home.description,
+    images: [
+      {
+        url: OG_IMAGE_PATH,
+        width: OG_IMAGE_WIDTH,
+        height: OG_IMAGE_HEIGHT,
+        alt: OG_IMAGE_ALT,
+        type: OG_IMAGE_TYPE,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: seoPages.home.title,
+    description: seoPages.home.description,
+    images: [OG_IMAGE_PATH],
   },
 };
 

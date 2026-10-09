@@ -3,6 +3,10 @@ import type { Metadata } from "next";
 export const SITE_URL = "https://darkmedia.tech";
 export const SITE_NAME = "Dark Media Tech";
 export const OG_IMAGE_PATH = "/og-image.png";
+export const OG_IMAGE_WIDTH = 1122;
+export const OG_IMAGE_HEIGHT = 1402;
+export const OG_IMAGE_TYPE = "image/png";
+export const OG_IMAGE_ALT = "Dark Media Tech, web and digital solutions in Mangalore";
 export const LOGO_PATH = "/logo.png";
 
 export type PageSeo = {
@@ -103,10 +107,10 @@ export function pageMetadata(page: PageSeo): Metadata {
       images: [
         {
           url: OG_IMAGE_PATH,
-          width: 1200,
-          height: 630,
-          alt: "Dark Media Tech, web and digital solutions in Mangalore",
-          type: "image/jpeg",
+          width: OG_IMAGE_WIDTH,
+          height: OG_IMAGE_HEIGHT,
+          alt: OG_IMAGE_ALT,
+          type: OG_IMAGE_TYPE,
         },
       ],
     },
