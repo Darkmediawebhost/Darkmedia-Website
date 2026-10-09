@@ -44,7 +44,7 @@ export default function TrustedWorldwideSection() {
 
       <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 1, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -57,7 +57,7 @@ export default function TrustedWorldwideSection() {
         </motion.div>
         
         <motion.div 
-          initial={{ opacity: 0, x: 30 }}
+          initial={{ opacity: 1, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
@@ -71,7 +71,7 @@ export default function TrustedWorldwideSection() {
         {stats.map((stat, index) => (
           <motion.div 
             key={index} 
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 1, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, ease: "easeOut", delay: stat.delay }}

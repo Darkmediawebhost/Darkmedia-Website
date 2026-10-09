@@ -7,26 +7,26 @@ export default function VideoSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isPlaying, setIsPlaying] = useState(true); // Autoplay
   const [isMuted, setIsMuted] = useState(true); // Usually autoplay requires mute initially
-  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    const section = sectionRef.current;
+    const video = videoRef.current;
+    if (!section || !video) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          // Optional: Disconnect if you only want it to animate once
-          // observer.disconnect();
+        const onScreen = entry.isIntersecting;
+        if (onScreen) {
+          video.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+        } else {
+          video.pause();
+          setIsPlaying(false);
         }
       },
-      {
-        threshold: 0.2, // Trigger when 20% of the section is visible
-      }
+      { rootMargin: "200px 0px", threshold: 0.2 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
+    observer.observe(section);
     return () => observer.disconnect();
   }, []);
 
@@ -58,33 +58,24 @@ export default function VideoSection() {
 
       <div className="w-full max-w-4xl text-center mb-12 sm:mb-16 relative px-2 sm:px-0">
         <h2 
-          className={`text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 mb-4 sm:mb-6 transition-all duration-1000 ease-out ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
+          className="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 mb-4 sm:mb-6"
         >
           Experience the Vision
         </h2>
-        <p 
-          className={`text-base sm:text-lg md:text-xl text-gray-500 font-medium max-w-2xl mx-auto transition-all duration-1000 delay-200 ease-out ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
-        >
+        <p className="text-base sm:text-lg md:text-xl text-gray-500 font-medium max-w-2xl mx-auto">
           Immerse yourself in our latest production. We craft visual stories that leave a lasting impact.
         </p>
       </div>
 
       <div 
-        className={`relative w-full max-w-[1400px] rounded-2xl sm:rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2)] group ring-1 ring-gray-900/10 bg-black transition-all duration-1000 delay-400 ease-out hover:shadow-[0_20px_60px_-12px_rgba(0,0,0,0.3)] ${
-          isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-        }`}
+        className="relative w-full max-w-[1400px] rounded-2xl sm:rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2)] group ring-1 ring-gray-900/10 bg-black hover:shadow-[0_20px_60px_-12px_rgba(0,0,0,0.3)]"
       >
         <video ref={videoRef}
           src="/Video/IMG_7797.MOV"
-          autoPlay
           muted={isMuted}
           loop
           playsInline
-          preload="none"
+          preload="metadata"
           className="w-full h-auto object-cover aspect-video cursor-pointer opacity-95 group-hover:opacity-100 transition-opacity duration-500"
           onClick={togglePlay}
         >

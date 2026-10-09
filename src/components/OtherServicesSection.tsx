@@ -33,7 +33,7 @@ export default function OtherServicesSection() {
     <section className="w-full py-24 bg-[#FAFAFA] relative overflow-hidden flex flex-col items-center">
       <div className="max-w-[1400px] w-full mx-auto px-6 md:px-12 mb-12 text-center md:text-left flex flex-col md:flex-row justify-between items-end gap-6">
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
+          initial={{ opacity: 1, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
@@ -47,7 +47,7 @@ export default function OtherServicesSection() {
         </motion.div>
         
         <motion.div
-          initial={{ opacity: 0, x: 20 }}
+          initial={{ opacity: 1, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -65,7 +65,7 @@ export default function OtherServicesSection() {
         {otherServices.map((service, idx) => (
           <motion.div
             key={service.title}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 1, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: idx * 0.15 }}

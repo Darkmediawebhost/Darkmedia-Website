@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import SmoothVideo from './SmoothVideo';
 import Link from 'next/link';
 
 const faqs = [
@@ -34,7 +35,7 @@ export default function FAQSection() {
       <div className="max-w-[1400px] mx-auto">
         <div className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
@@ -45,7 +46,7 @@ export default function FAQSection() {
             </h2>
           </motion.div>
           <motion.p 
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 1, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -63,7 +64,7 @@ export default function FAQSection() {
               return (
                 <motion.div 
                   key={index} 
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 1, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -109,7 +110,7 @@ export default function FAQSection() {
 
           {/* Right Column: CTA Card with Video Background */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 1, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -119,16 +120,10 @@ export default function FAQSection() {
               
               {/* Background Video (Simulating Anubi AI Section / SketchSculpture) */}
               <div className="absolute inset-0 z-0 bg-[#101828]">
-                <video autoPlay 
-                  loop 
-                  muted 
-                  playsInline 
+                <SmoothVideo
+                  src="https://cdn.dribbble.com/userupload/11267104/file/original-4c472c9a997ef0e854999f8d167f2ec6.mp4"
                   className="w-full h-full object-cover opacity-80 mix-blend-screen scale-105 group-hover:scale-110 transition-transform duration-1000 ease-out"
-                 preload="none">
-                  <source src="https://cdn.dribbble.com/userupload/11267104/file/original-4c472c9a997ef0e854999f8d167f2ec6.mp4" type="video/mp4" />
-                
-          <track kind="captions" srcLang="en" label="English" default />
-        </video>
+                />
                 {/* Gradient Overlay for text readability */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#101828] via-[#101828]/60 to-transparent"></div>
               </div>

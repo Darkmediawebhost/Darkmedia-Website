@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { target } from "vgpu";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -13,16 +12,26 @@ export default function Navbar() {
   const pathname = usePathname();
 
   useEffect(() => {
+    let frame = 0;
+    let scrolled = false;
+
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        const next = window.scrollY > 20;
+        if (next !== scrolled) {
+          scrolled = next;
+          setIsScrolled(next);
+        }
+      });
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   // Close mobile menu when pathname changes
@@ -31,169 +40,203 @@ export default function Navbar() {
     setMobileServicesOpen(false);
   }, [pathname]);
 
-  const navLinks = [
+  const navLinks: {
+    name: string;
+    href: string;
+    target?: string;
+    subLinks?: { name: string; href: string }[];
+  }[] = [
     { name: "Home", href: "/" },
     { name: "About Us", href: "/about-us" },
-    { 
-      name: "All Services", 
+    {
+      name: "Services",
       href: "/services",
       subLinks: [
+        { name: "All Services", href: "/services" },
         { name: "Web Development", href: "/services/web-development" },
         { name: "Branding", href: "/services/branding" },
         { name: "Video Production", href: "/services/video-production" },
         { name: "SEO", href: "/services/seo-analytics" },
-        { name: "Social Media Management", href: "/services/social-media-management" },
-      ]
+        { name: "Social Media", href: "/services/social-media-management" },
+      ],
     },
-    { name: "Projects", href: "https://portfolio.darkmedia.tech/",target:'_blank' },
-    { name: "Blog", href: "/" },
-    { name: "Contact Us", href: "/contact-us" },
+    { name: "Projects", href: "https://portfolio.darkmedia.tech/", target: "_blank" },
+    { name: "Contact", href: "/contact-us" },
   ];
+
+  const linkIsActive = (href: string, subLinks?: { href: string }[]) =>
+    pathname === href || Boolean(subLinks?.some((sub) => pathname === sub.href || pathname.startsWith(`${sub.href}/`)));
 
   return (
     <>
-      <header className={`fixed top-0 left-0 w-full z-50 flex justify-center transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${isScrolled ? "py-3 sm:py-4" : "py-6"}`}>
-        <div className={`transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] w-full ${isScrolled && !isMobileMenuOpen ? "max-w-5xl px-3 sm:px-6" : "max-w-[1400px] px-6 md:px-8"}`}>
-          <nav className={`w-full flex items-center justify-between transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${isScrolled && !isMobileMenuOpen ? "bg-white/90 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] border border-gray-200/50 rounded-[2rem] px-4 sm:px-8 py-2 sm:py-3" : "bg-transparent px-0 py-0"}`}>
-            {/* Logo */}
-            <Link href="/" className="flex items-center group relative z-[60]">
-              <Image 
-                src="/assets/Dark Media Logo - White.png" 
-                alt="Dark Media Logo" 
-                width={180} 
-                height={60} 
-                className={`invert h-auto w-auto object-contain transition-all duration-500 ${isScrolled ? "max-h-[30px] md:max-h-[34px]" : "max-h-[36px] md:max-h-[40px] group-hover:scale-105"}`}
-                priority
-              />
-            </Link>
+      <header className={`fixed top-0 left-0 z-50 flex w-full justify-center transition-[padding] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${isScrolled ? "py-3 sm:py-4" : "py-4 sm:py-6"}`}>
+        <div className={`w-full transition-[max-width,padding] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${isScrolled && !isMobileMenuOpen ? "max-w-5xl px-3 sm:px-6" : "max-w-[1400px] px-4 sm:px-6 md:px-8"}`}>
+        <nav
+          className={`flex w-full items-center justify-between gap-3 border-0 transition-[background-color,box-shadow,border-radius,padding] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
+            isScrolled && !isMobileMenuOpen
+              ? "rounded-full bg-white/90 px-3 py-2 shadow-[0_12px_40px_rgba(17,19,45,0.1)] backdrop-blur-2xl sm:px-6 sm:py-2.5"
+              : "rounded-none bg-transparent px-0 py-0 shadow-none"
+          }`}
+        >
+          <Link href="/" className="group relative z-[60] flex shrink-0 items-center">
+            <Image
+              src="/assets/Dark Media Logo - White.png"
+              alt="Dark Media Tech logo"
+              width={180}
+              height={60}
+              className={`h-auto w-auto invert object-contain transition-all duration-500 ${isScrolled ? "max-h-[28px] sm:max-h-[32px]" : "max-h-[34px] sm:max-h-[40px] group-hover:scale-105"}`}
+              priority
+            />
+          </Link>
 
-            {/* Desktop Nav Links */}
-            <div className="hidden lg:flex items-center gap-8 xl:gap-10 text-sm font-medium">
-              {navLinks.map((link) => {
-                const isActive = pathname === link.href || (link.subLinks && link.subLinks.some(sub => pathname === sub.href));
-                return (
-                  <div key={link.name} className="relative group py-4">
-                    <Link 
-                      href={link.href} 
-                      target={(link as any).target}
-                      className={`relative py-1 overflow-hidden inline-flex items-center gap-1.5 ${isActive ? "text-black font-semibold" : "text-gray-600 hover:text-black"}`}
-                    >
-                      <span className="relative z-10 transition-colors duration-300">{link.name}</span>
-                      {link.subLinks && (
-                        <svg className="w-3.5 h-3.5 relative z-10 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"></path></svg>
-                      )}
-                      <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-black transform origin-left transition-transform duration-300 ease-out ${isActive && !link.subLinks ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}></span>
-                    </Link>
-
-                    {/* Desktop Dropdown */}
-                    {link.subLinks && (
-                      <div className="absolute top-full left-1/2 -translate-x-1/2 mt-0 w-56 opacity-0 translate-y-4 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50">
-                        <div className="bg-white/90 backdrop-blur-xl border border-white/50 shadow-[0_20px_40px_rgb(0,0,0,0.1)] rounded-2xl p-2 flex flex-col relative overflow-hidden">
-                          {link.subLinks.map((subLink) => (
-                            <Link 
-                              key={subLink.name} 
-                              href={subLink.href}
-                              className="relative px-4 py-3 rounded-xl hover:bg-gray-100/50 transition-colors text-sm font-medium text-gray-600 hover:text-black group/item"
-                            >
-                              <span className="relative z-10 transition-transform duration-300 inline-block group-hover/item:translate-x-1">{subLink.name}</span>
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* CTA Button & Mobile Menu Toggle */}
-            <div className="flex items-center gap-4 relative z-[60]">
-              <Link href="/contact-us" className="hidden md:flex relative overflow-hidden group bg-[#11132d] text-white px-8 py-3 rounded-full text-sm font-medium shadow-[0_4px_14px_0_rgba(17,19,45,0.39)] hover:shadow-[0_6px_20px_rgba(17,19,45,0.23)] hover:-translate-y-0.5 transition-all duration-300">
-                <span className="relative z-10">Get a Free Quote</span>
-                <div className="absolute inset-0 bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></div>
-              </Link>
-              
-              {/* Mobile Menu Toggle Button */}
-              <button 
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className={`lg:hidden flex flex-col justify-center items-center w-12 h-12 rounded-full transition-colors ${isMobileMenuOpen ? "bg-gray-100" : "bg-white/50 backdrop-blur-sm border border-gray-200"}`}
-                aria-label="Toggle mobile menu"
-              >
-                <div className="w-5 h-4 relative flex flex-col justify-between">
-                  <span className={`w-full h-[2px] bg-black rounded-full transition-all duration-300 ${isMobileMenuOpen ? "rotate-45 absolute top-1/2 -translate-y-1/2" : ""}`}></span>
-                  <span className={`w-full h-[2px] bg-black rounded-full transition-all duration-300 ${isMobileMenuOpen ? "opacity-0" : ""}`}></span>
-                  <span className={`w-full h-[2px] bg-black rounded-full transition-all duration-300 ${isMobileMenuOpen ? "-rotate-45 absolute top-1/2 -translate-y-1/2" : ""}`}></span>
-                </div>
-              </button>
-            </div>
-          </nav>
-        </div>
-      </header>
-
-      {/* Full Screen Mobile Menu Overlay */}
-      <div 
-        className={`fixed inset-0 bg-white z-40 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] lg:hidden ${
-          isMobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full pointer-events-none"
-        }`}
-      >
-        <div className="flex flex-col h-full pt-32 px-6 pb-12 overflow-y-auto">
-          <div className="flex flex-col gap-6 mt-8">
-            {navLinks.map((link, index) => {
-              const isActive = pathname === link.href || (link.subLinks && link.subLinks.some(sub => pathname === sub.href));
+          <div className="hidden items-center gap-6 text-sm font-medium xl:gap-8 lg:flex">
+            {navLinks.map((link) => {
+              const isActive = linkIsActive(link.href, link.subLinks);
               return (
-                <div 
-                  key={link.name} 
-                  className={`overflow-hidden transition-all duration-500 delay-${(index + 1) * 100} ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
-                >
-                  {link.subLinks ? (
-                    <div>
-                      <button 
-                        onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                        className={`w-full flex items-center justify-between text-4xl sm:text-5xl font-bold tracking-tight ${isActive ? "text-black" : "text-gray-400 hover:text-black transition-colors"}`}
-                      >
-                        {link.name}
-                        <svg className={`w-8 h-8 transition-transform duration-300 ${mobileServicesOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7"></path></svg>
-                      </button>
-                      <div className={`overflow-hidden transition-all duration-300 ${mobileServicesOpen ? "max-h-96 mt-6 opacity-100" : "max-h-0 opacity-0"}`}>
-                        <div className="flex flex-col gap-5 pl-2 border-l-2 border-gray-100 ml-3">
-                          {link.subLinks.map((subLink) => (
-                            <Link 
-                              key={subLink.name} 
+                <div key={link.name} className="group relative py-3">
+                  <Link
+                    href={link.href}
+                    target={link.target}
+                    rel={link.target === "_blank" ? "noopener noreferrer" : undefined}
+                    className={`relative inline-flex items-center gap-1.5 overflow-hidden py-1 ${
+                      isActive ? "font-semibold text-black" : "text-gray-600 hover:text-black"
+                    }`}
+                  >
+                    <span className="relative z-10 transition-colors duration-300">{link.name}</span>
+                    {link.subLinks && (
+                      <svg className="relative z-10 h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-180 group-focus-within:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    )}
+                    <span className={`absolute bottom-0 left-0 h-[2px] w-full origin-left bg-black transition-transform duration-300 ease-out ${isActive && !link.subLinks ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`} />
+                  </Link>
+
+                  {link.subLinks && (
+                    <div className="pointer-events-none absolute left-1/2 top-full z-50 w-60 -translate-x-1/2 translate-y-3 pt-2 opacity-0 transition-all duration-300 ease-out group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                      <div className="rounded-2xl border-0 bg-white/95 p-2 shadow-[0_20px_40px_rgba(17,19,45,0.12)] backdrop-blur-xl">
+                        {link.subLinks.map((subLink) => {
+                          const subActive = pathname === subLink.href || (subLink.href !== "/services" && pathname.startsWith(`${subLink.href}/`));
+                          return (
+                            <Link
+                              key={subLink.name}
                               href={subLink.href}
-                              className="text-2xl sm:text-3xl font-semibold text-gray-500 hover:text-black transition-colors pl-4"
+                              className={`group/item block rounded-xl px-4 py-3 text-sm font-medium transition-colors ${
+                                subActive ? "bg-gray-100 text-black" : "text-gray-600 hover:bg-gray-100/70 hover:text-black"
+                              }`}
                             >
-                              {subLink.name}
+                              <span className="inline-block transition-transform duration-300 group-hover/item:translate-x-1">{subLink.name}</span>
                             </Link>
-                          ))}
-                        </div>
+                          );
+                        })}
                       </div>
                     </div>
-                  ) : (
-                    <Link 
-                      href={link.href} 
-                      target={(link as any).target}
-                      className={`inline-block text-4xl sm:text-5xl font-bold tracking-tight ${isActive ? "text-black" : "text-gray-400 hover:text-black transition-colors"}`}
-                    >
-                      {link.name}
-                    </Link>
                   )}
                 </div>
               );
             })}
           </div>
 
-          <div className={`mt-auto pt-12 transition-all duration-500 delay-700 ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}>
-            <div className="w-full h-[1px] bg-gray-200 mb-8"></div>
-            <Link href="/contact-us" className="inline-flex w-full justify-center relative overflow-hidden group bg-[#11132d] text-white px-8 py-4 rounded-full text-base font-medium mb-8 text-center">
+          <div className="relative z-[60] flex items-center gap-2 sm:gap-3">
+            <Link
+              href="/contact-us"
+              className="group relative hidden overflow-hidden rounded-full bg-[#11132d] px-5 py-2.5 text-sm font-medium text-white shadow-[0_4px_14px_rgba(17,19,45,0.39)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(17,19,45,0.23)] md:inline-flex"
+            >
               <span className="relative z-10">Get a Free Quote</span>
+              <span className="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-500 ease-out group-hover:translate-x-0" />
             </Link>
-            
-            <div className="flex flex-col gap-4">
-              <h4 className="text-xs font-bold tracking-[0.2em] text-gray-400 uppercase">Contact Us</h4>
-              <a href="tel:+919480889252" className="text-lg font-medium text-gray-900">+91 94808 89252</a>
-              <a href="mailto:info@darkmedia.tech" className="text-lg font-medium text-gray-900">info@darkmedia.tech</a>
-            </div>
+
+            <button
+              type="button"
+              onClick={() => setIsMobileMenuOpen((open) => !open)}
+              className="flex h-10 w-10 items-center justify-center rounded-full border-0 bg-white/90 shadow-[0_6px_20px_rgba(17,19,45,0.08)] transition-transform duration-300 lg:hidden"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
+            >
+              <span className="relative block h-3.5 w-4">
+                <span className={`absolute left-0 h-[2px] w-full rounded-full bg-[#11132d] transition-all duration-300 ${isMobileMenuOpen ? "top-1.5 rotate-45" : "top-0"}`} />
+                <span className={`absolute left-0 top-1.5 h-[2px] w-full rounded-full bg-[#11132d] transition-opacity duration-300 ${isMobileMenuOpen ? "opacity-0" : "opacity-100"}`} />
+                <span className={`absolute left-0 h-[2px] w-full rounded-full bg-[#11132d] transition-all duration-300 ${isMobileMenuOpen ? "top-1.5 -rotate-45" : "top-3"}`} />
+              </span>
+            </button>
           </div>
+        </nav>
+        </div>
+      </header>
+
+      <div
+        className={`fixed inset-0 z-40 bg-[#11132d]/30 transition-opacity duration-300 lg:hidden ${
+          isMobileMenuOpen ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+        onClick={() => setIsMobileMenuOpen(false)}
+      />
+
+      <div
+        inert={isMobileMenuOpen ? undefined : true}
+        className={`fixed inset-x-3 top-[4.5rem] z-40 max-h-[calc(100dvh-5.5rem)] overflow-y-auto rounded-3xl border-0 bg-white p-3 shadow-[0_20px_50px_rgba(17,19,45,0.14)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] lg:hidden ${
+          isMobileMenuOpen ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-2 opacity-0"
+        }`}
+      >
+        <div className="flex flex-col gap-1">
+          {navLinks.map((link) => {
+            const isActive = linkIsActive(link.href, link.subLinks);
+            if (link.subLinks) {
+              return (
+                <div key={link.name}>
+                  <button
+                    type="button"
+                    onClick={() => setMobileServicesOpen((open) => !open)}
+                    className={`flex w-full items-center justify-between rounded-2xl px-4 py-3 text-left text-base font-semibold ${
+                      isActive ? "bg-gray-100 text-[#11132d]" : "text-gray-700"
+                    }`}
+                    aria-expanded={mobileServicesOpen}
+                  >
+                    {link.name}
+                    <svg className={`h-4 w-4 transition-transform duration-300 ${mobileServicesOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  <div className={`overflow-hidden transition-all duration-300 ${mobileServicesOpen ? "max-h-80 py-1" : "max-h-0"}`}>
+                    {link.subLinks.map((subLink) => {
+                      const subActive = pathname === subLink.href || (subLink.href !== "/services" && pathname.startsWith(`${subLink.href}/`));
+                      return (
+                        <Link
+                          key={subLink.name}
+                          href={subLink.href}
+                          className={`block rounded-xl px-4 py-2.5 text-sm font-medium ${
+                            subActive ? "text-[#11132d]" : "text-gray-500"
+                          }`}
+                        >
+                          {subLink.name}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            }
+
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                target={link.target}
+                rel={link.target === "_blank" ? "noopener noreferrer" : undefined}
+                className={`rounded-2xl px-4 py-3 text-base font-semibold ${
+                  isActive ? "bg-[#11132d] text-white" : "text-gray-700"
+                }`}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
+        </div>
+
+        <div className="mt-2 border-t border-gray-100 px-4 pb-2 pt-4">
+          <Link href="/contact-us" className="mb-4 flex w-full items-center justify-center rounded-full bg-[#11132d] px-5 py-3 text-sm font-medium text-white">
+            Get a Free Quote
+          </Link>
+          <a href="tel:+919480889252" className="block text-sm font-medium text-gray-900">+91 94808 89252</a>
+          <a href="mailto:info@darkmedia.tech" className="mt-1 block text-sm font-medium text-gray-500">info@darkmedia.tech</a>
         </div>
       </div>
     </>

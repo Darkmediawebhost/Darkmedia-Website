@@ -1,7 +1,7 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import Image from "next/image";
-import Link from "next/link";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbJsonLd, pageMetadata, seoPages, webPageJsonLd } from "@/lib/seo";
 import AeroShards from "@/components/AeroShards";
 import AnubiSection from "@/components/AnubiSection";
 import OurEdgeSection from "@/components/OurEdgeSection";
@@ -9,14 +9,20 @@ import TrustedWorldwideSection from "@/components/TrustedWorldwideSection";
 import FAQSection from "@/components/FAQSection";
 import ClientMarqueeSection from "@/components/ClientMarqueeSection";
 
-export const metadata = {
-  title: "About Us | Mydbucket",
-  description: "More than designers. Problem solvers.",
-};
+export const metadata = pageMetadata(seoPages.about);
 
 export default function AboutUsPage() {
   return (
     <>
+    <JsonLd
+      data={[
+        webPageJsonLd(seoPages.about, "AboutPage"),
+        breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about-us" },
+        ]),
+      ]}
+    />
     <Navbar/>
 
    
@@ -41,7 +47,7 @@ export default function AboutUsPage() {
             speed={1}
             spin={1}
             interaction="repel"
-            density={1.5}
+            density={1}
             shardSize={1.1}
             stretch={1}
             turbulence={1}

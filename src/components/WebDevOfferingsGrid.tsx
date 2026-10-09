@@ -94,7 +94,7 @@ const BentoCard = ({ offering, index }: { offering: any, index: number }) => {
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 1, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -131,7 +131,7 @@ export default function WebDevOfferingsGrid() {
     <section className="w-full py-32 bg-white relative overflow-hidden flex flex-col items-center">
       <div className="max-w-[1400px] w-full mx-auto px-6 md:px-12 mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
@@ -146,7 +146,7 @@ export default function WebDevOfferingsGrid() {
         </motion.div>
         
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}

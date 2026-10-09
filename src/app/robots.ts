@@ -1,11 +1,12 @@
-import type { MetadataRoute } from 'next'
+import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/seo";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
-      userAgent: '*',
-      allow: '/',
+      userAgent: "*",
+      allow: "/",
     },
-    sitemap: 'https://www.darkmedia.tech/sitemap.xml',
-  }
+    sitemap: `${SITE_URL}/sitemap.xml`,
+  };
 }

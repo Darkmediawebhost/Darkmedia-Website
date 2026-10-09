@@ -1,28 +1,26 @@
-# Dark Media
+# Dark Media Tech
 
-> Dark Media is a premier full-service digital agency specializing in Web Development, Strategic Branding, Video Production, SEO & Analytics, and Social Media Management. Serving 400+ brands across India (Mangaluru HQ) and the GCC region (Dubai, Riyadh, Muscat).
+> Dark Media Tech is a Mangalore studio for web development, branding, video production, SEO, and social media. The studio is based in Mangaluru, Karnataka, and also works with clients in the GCC.
 
 ## Core Capabilities
 
-- [Web Development](https://www.darkmedia.tech/services/web-development): Modern Next.js e-commerce platforms, corporate websites, and enterprise web applications.
-- [Branding Agency](https://www.darkmedia.tech/services/branding): Visual identity design, brand strategy, typography, guidelines, and corporate rebranding.
-- [Video Production](https://www.darkmedia.tech/services/video-production): High-end corporate films, TV & digital ad commercials, and next-gen AI video production.
-- [SEO & Growth Analytics](https://www.darkmedia.tech/services/seo-analytics): Data-driven organic search strategy, local SEO domination, and technical site performance audits.
-- [Social Media Management](https://www.darkmedia.tech/services/social-media-management): High-ROI performance marketing (Meta, Google, LinkedIn) and viral short-form video reels studio.
+- [Web Development](https://darkmedia.tech/services/web-development): Websites and web applications.
+- [Web Design and Development in Mangalore](https://darkmedia.tech/services/web-development/mangalore): Website development company in Mangalore.
+- [Web Design and Development in Karnataka](https://darkmedia.tech/services/web-development/karnataka): Website development company in Karnataka.
+- [Web Design and Development in Bangalore](https://darkmedia.tech/services/web-development/bangalore): Website development company in Bangalore.
+- [Branding](https://darkmedia.tech/services/branding): Visual identity, logos, and brand systems.
+- [Video Production](https://darkmedia.tech/services/video-production): Corporate films, commercials, and brand video.
+- [SEO and Analytics](https://darkmedia.tech/services/seo-analytics): Technical SEO, local search, and analytics.
+- [Social Media Management](https://darkmedia.tech/services/social-media-management): Social content and campaign management.
 
-## Target Geographies & Regional Hubs
+## Pages
 
-- [Mangaluru Headquarters](https://www.darkmedia.tech/locations/mangaluru): Primary development & creative engineering hub in Karnataka, India.
-- [Dubai Regional Hub](https://www.darkmedia.tech/locations/dubai): Serving UAE enterprises with luxury digital experiences and multi-currency web solutions.
-- [Riyadh Growth Center](https://www.darkmedia.tech/locations/riyadh): Supporting Saudi Vision 2030 corporate initiatives with bilingual media production.
-- [Muscat Agency Center](https://www.darkmedia.tech/locations/muscat): Corporate web development and branding services tailored for Oman enterprises.
-
-## Key Resources
-
-- [Our Work & Portfolio](https://www.darkmedia.tech/work): Case studies for 400+ client projects.
-- [Marketing & Tech Insights](https://www.darkmedia.tech/blog): In-depth strategy guides, technical tutorials, and industry reports.
-- [Request a Quote](https://www.darkmedia.tech/contact-us): Direct agency contact and project inquiry form.
+- [Home](https://darkmedia.tech/)
+- [About](https://darkmedia.tech/about-us)
+- [Services](https://darkmedia.tech/services)
+- [Contact](https://darkmedia.tech/contact-us)
+- [Portfolio](https://portfolio.darkmedia.tech/)
 
 ## Detailed Information
 
-- [llms-full.txt](https://www.darkmedia.tech/llms-full.txt): Comprehensive specifications, sub-services breakdown, and agency profile for deep LLM ingestion.
+- [llms-full.txt](https://darkmedia.tech/llms-full.txt): Longer description of the studio and its services.

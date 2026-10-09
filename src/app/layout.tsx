@@ -3,25 +3,31 @@ import { Bricolage_Grotesque } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import ScrollToTop from "@/components/ScrollToTop";
+import { OG_IMAGE_PATH, seoPages, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.darkmedia.tech"),
-  title: "Dark Media | Expert Branding, Web & Video Solutions",
-  description: "Trusted by visionary brands worldwide to craft unforgettable digital experiences and drive meaningful growth.",
+  metadataBase: new URL(SITE_URL),
+  applicationName: "Dark Media Tech",
+  title: {
+    absolute: seoPages.home.title,
+  },
+  description: seoPages.home.description,
   robots: {
     index: true,
     follow: true,
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
 };

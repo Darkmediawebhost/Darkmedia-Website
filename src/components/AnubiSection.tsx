@@ -2,13 +2,32 @@
 import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 
+const PARTICLE_TEXTS = [
+  "DARK MEDIA",
+  "WEB\nDEVELOPMENT",
+  "BRANDING",
+  "VIDEO\nPRODUCTION",
+  "SEO &\nANALYTICS",
+  "DARKMEDIA\nTECH",
+];
+
+const canvasContexts = new WeakMap<HTMLCanvasElement, CanvasRenderingContext2D>();
+
+const readCanvasContext = (canvas: HTMLCanvasElement) => {
+  const cached = canvasContexts.get(canvas);
+  if (cached) return cached;
+  const ctx = canvas.getContext('2d', { willReadFrequently: true }) || canvas.getContext('2d');
+  if (ctx) canvasContexts.set(canvas, ctx);
+  return ctx;
+};
+
 const ParticleText = ({ texts }: { texts: string[] }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    const ctx = readCanvasContext(canvas);
     if (!ctx) return;
 
     let particles: Particle[] = [];
@@ -17,13 +36,19 @@ const ParticleText = ({ texts }: { texts: string[] }) => {
     let currentIndex = 0;
     let intervalId: NodeJS.Timeout;
 
-    const handleMouseMove = (e: MouseEvent) => {
+    const handlePointerMove = (e: PointerEvent) => {
       const rect = canvas.getBoundingClientRect();
       mouse.x = e.clientX - rect.left;
       mouse.y = e.clientY - rect.top;
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    const resetPointer = () => {
+      mouse.x = -1000;
+      mouse.y = -1000;
+    };
+
+    canvas.addEventListener('pointermove', handlePointerMove, { passive: true });
+    canvas.addEventListener('pointerleave', resetPointer);
 
     class Particle {
       x: number;
@@ -60,7 +85,7 @@ const ParticleText = ({ texts }: { texts: string[] }) => {
       update(time: number) {
         let dx = mouse.x - this.x;
         let dy = mouse.y - this.y;
-        let distance = Math.sqrt(dx * dx + dy * dy);
+        let distance = Math.sqrt(dx * dx + dy * dy) || 1;
         let forceDirectionX = dx / distance;
         let forceDirectionY = dy / distance;
         let maxDistance = mouse.radius;
@@ -68,9 +93,8 @@ const ParticleText = ({ texts }: { texts: string[] }) => {
         let directionX = forceDirectionX * force * this.density;
         let directionY = forceDirectionY * force * this.density;
 
-        // Add wave movement
-        let waveX = Math.sin(time * 0.002 + this.baseY * 0.02) * 5;
-        let waveY = Math.cos(time * 0.002 + this.baseX * 0.02) * 5;
+        let waveX = Math.sin(time * 0.002 + this.baseY * 0.02) * 1.5;
+        let waveY = Math.cos(time * 0.002 + this.baseX * 0.02) * 1.5;
 
         if (distance < mouse.radius) {
           this.x -= directionX;
@@ -100,20 +124,24 @@ const ParticleText = ({ texts }: { texts: string[] }) => {
       const lines = text.split('\n');
       const maxLineLength = Math.max(...lines.map(l => l.length));
       
-      // Responsive font size calculation (constrained by width and height)
-      const widthFactor = canvas.width < 768 ? 0.75 : 0.55;
-      let fontSize = Math.min(
-        canvas.width / (maxLineLength * widthFactor), 
-        canvas.height / (lines.length * 1.5), 
-        140
+      const widthFactor = canvas.width < 768 ? 0.72 : 0.58;
+      const usableHeight = canvas.height * 0.5;
+      const fontSize = Math.max(
+        28,
+        Math.min(
+          canvas.width / (maxLineLength * widthFactor),
+          usableHeight / (lines.length * 1.15),
+          120
+        )
       );
-      
-      ctx.font = `bold ${fontSize}px Inter, sans-serif`;
+
+      ctx.font = `700 ${fontSize}px Arial, Helvetica, sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      
-      const lineHeight = fontSize * 1.1;
-      const startY = canvas.height / 2 - (lines.length - 1) * lineHeight / 2;
+
+      const lineHeight = fontSize * 1.05;
+      const blockHeight = (lines.length - 1) * lineHeight;
+      const startY = canvas.height * 0.4 - blockHeight / 2;
       
       lines.forEach((line, index) => {
          ctx.fillText(line.toUpperCase(), canvas.width / 2, startY + index * lineHeight);
@@ -123,7 +151,7 @@ const ParticleText = ({ texts }: { texts: string[] }) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       const targets = [];
-      const step = canvas.width < 768 ? 3 : 5; 
+      const step = canvas.width < 768 ? 4 : 5; 
       
       for (let y = 0, y2 = textCoordinates.height; y < y2; y += step) {
         for (let x = 0, x2 = textCoordinates.width; x < x2; x += step) {
@@ -154,16 +182,14 @@ const ParticleText = ({ texts }: { texts: string[] }) => {
       }
     };
 
-    const init = () => {
-      canvas.width = canvas.clientWidth;
-      canvas.height = canvas.clientHeight;
-      morphTo(texts[currentIndex]);
-    };
-
     let startTime = Date.now();
+    let running = false;
+    let onScreen = false;
+
     const animate = () => {
+      if (!running) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      let time = Date.now() - startTime;
+      const time = Date.now() - startTime;
       for (let i = 0; i < particles.length; i++) {
         particles[i].draw();
         particles[i].update(time);
@@ -171,26 +197,74 @@ const ParticleText = ({ texts }: { texts: string[] }) => {
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    setTimeout(() => {
-      init();
+    const start = () => {
+      if (running || !onScreen || document.visibilityState === 'hidden') return;
+      running = true;
       animate();
-      
-      // Start morphing interval
-      intervalId = setInterval(() => {
-        currentIndex = (currentIndex + 1) % texts.length;
+    };
+
+    const stop = () => {
+      running = false;
+      cancelAnimationFrame(animationFrameId);
+    };
+
+    const syncPlayback = () => {
+      if (onScreen && document.visibilityState === 'visible') start();
+      else stop();
+    };
+
+    let booted = false;
+
+    const boot = () => {
+      const width = Math.floor(canvas.clientWidth);
+      const height = Math.floor(canvas.clientHeight);
+      if (width < 2 || height < 2) return;
+      if (!booted || canvas.width !== width || canvas.height !== height) {
+        canvas.width = width;
+        canvas.height = height;
         morphTo(texts[currentIndex]);
-      }, 3500); // Morph every 3.5 seconds
-    }, 100);
+        booted = true;
+      }
+      syncPlayback();
+    };
+
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        onScreen = entry.isIntersecting;
+        if (onScreen) boot();
+        else stop();
+      },
+      { rootMargin: '80px 0px', threshold: 0.01 }
+    );
+
+    const resizeObserver = new ResizeObserver(() => boot());
+    resizeObserver.observe(canvas);
+    visibilityObserver.observe(canvas);
+    boot();
+    const bootFrame = requestAnimationFrame(() => boot());
+
+    intervalId = setInterval(() => {
+      if (!onScreen || document.visibilityState === 'hidden' || !booted) return;
+      currentIndex = (currentIndex + 1) % texts.length;
+      morphTo(texts[currentIndex]);
+    }, 3500);
 
     const handleResize = () => {
-      init();
+      boot();
     };
+    const handleVisibility = () => syncPlayback();
     window.addEventListener('resize', handleResize);
+    document.addEventListener('visibilitychange', handleVisibility);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      canvas.removeEventListener('pointermove', handlePointerMove);
+      canvas.removeEventListener('pointerleave', resetPointer);
       window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(animationFrameId);
+      document.removeEventListener('visibilitychange', handleVisibility);
+      cancelAnimationFrame(bootFrame);
+      resizeObserver.disconnect();
+      visibilityObserver.disconnect();
+      stop();
       clearInterval(intervalId);
     };
   }, [texts]);
@@ -199,7 +273,6 @@ const ParticleText = ({ texts }: { texts: string[] }) => {
     <canvas 
       ref={canvasRef} 
       className="absolute inset-0 w-full h-full block" 
-      style={{ filter: 'blur(0.3px)' }} 
     />
   );
 };
@@ -235,15 +308,8 @@ export default function AnubiSection() {
       </div>
 
       {/* Center Canvas / Content */}
-      <div className="absolute inset-0 z-0 cursor-crosshair sm:mt20">
-        <ParticleText texts={[
-          "DARK MEDIA",
-          "WEB\nDEVELOPMENT",
-          "BRANDING",
-          "VIDEO\nPRODUCTION",
-          "SEO &\nANALYTICS",
-          "DARKMEDIA\nTECH"
-        ]} />
+      <div className="absolute inset-0 z-0 cursor-crosshair">
+        <ParticleText texts={PARTICLE_TEXTS} />
       </div>
 
       {/* Left HUD (Rotated) */}

@@ -1,0 +1,17 @@
+type JsonLdData = Record<string, unknown>;
+
+export function JsonLd({ data }: { data: JsonLdData | JsonLdData[] }) {
+  const blocks = Array.isArray(data) ? data : [data];
+
+  return (
+    <>
+      {blocks.map((block) => (
+        <script
+          key={String(block["@type"])}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(block) }}
+        />
+      ))}
+    </>
+  );
+}

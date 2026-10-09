@@ -5,6 +5,7 @@ import { SlideUpText } from "@/components/SlideUpText";
 import { TextReveal } from "@/components/TextReveal";
 
 const videos = [
+  "Img_6804.mp4",
   "Ved1.mp4",
   "Ved3.mp4",
   "Ved4.mp4",
@@ -34,9 +35,9 @@ export function VideoCarousel() {
 
   const handleTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement>) => {
     const video = e.currentTarget;
-    if (video.duration) {
-      setProgress((video.currentTime / video.duration) * 100);
-    }
+    if (!video.duration) return;
+    const next = Math.round((video.currentTime / video.duration) * 100);
+    setProgress((prev) => (prev === next ? prev : next));
   };
 
   const toggleMute = (e: React.MouseEvent) => {
@@ -46,14 +47,13 @@ export function VideoCarousel() {
 
   useEffect(() => {
     videoRefs.current.forEach((video, idx) => {
-      if (video) {
-        if (idx === currentIndex) {
-          video.currentTime = 0;
-          setProgress(0);
-          video.play().catch(e => console.log("Auto-play prevented", e));
-        } else {
-          video.pause();
-        }
+      if (!video) return;
+      if (idx === currentIndex && video.getAttribute("src")) {
+        video.currentTime = 0;
+        setProgress(0);
+        video.play().catch(() => {});
+      } else {
+        video.pause();
       }
     });
   }, [currentIndex]);
@@ -105,6 +105,7 @@ export function VideoCarousel() {
 
             const isCenter = offset === 0;
             const isVisible = Math.abs(offset) <= 2;
+            const shouldLoad = Math.abs(offset) <= 1;
 
             return (
               <div 
@@ -128,7 +129,7 @@ export function VideoCarousel() {
                       videoRefs.current[idx] = el;
                     }}
                     preload="none"
-                    src={`/Video/${video}`} 
+                    src={shouldLoad ? `/Video/${video}` : undefined} 
                     muted={isMuted}
                     playsInline 
                     loop={false}

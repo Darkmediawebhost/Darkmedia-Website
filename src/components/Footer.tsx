@@ -2,11 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import AnubiSection from "./AnubiSection";
 
 export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -137,10 +136,16 @@ export default function Footer() {
             {[
               { name: 'Home', href: '/' },
               { name: 'About Us', href: '/about-us' },
-              { name: 'Works', href: '/projects' },
+              { name: 'Services', href: '/services' },
+              { name: 'Works', href: 'https://portfolio.darkmedia.tech/' },
               { name: 'Contact', href: '/contact-us' }
             ].map((page) => (
-              <Link key={page.name} href={page.href} className="text-lg font-medium text-gray-300 hover:text-white hover:translate-x-2 transition-all duration-300 w-fit">
+              <Link
+                key={page.name}
+                href={page.href}
+                {...(page.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                className="text-lg font-medium text-gray-300 hover:text-white hover:translate-x-2 transition-all duration-300 w-fit"
+              >
                 {page.name}
               </Link>
             ))}
@@ -150,7 +155,9 @@ export default function Footer() {
           <div className={`flex flex-col gap-4 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             <h3 className="text-xs font-bold tracking-[0.3em] text-gray-500 mb-4 uppercase">Services</h3>
             {[
+              { name: 'All Services', href: '/services' },
               { name: 'Web Development', href: '/services/web-development' },
+             
               { name: 'Branding', href: '/services/branding' },
               { name: 'Video Production', href: '/services/video-production' },
               { name: 'SEO', href: '/services/seo-analytics' },

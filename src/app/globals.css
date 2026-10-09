@@ -11,16 +11,59 @@
   --font-sans: var(--font-bricolage);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  overflow-x: clip;
+}
+
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
+}
+
+.animate-slide,
+.animate-marquee-left,
+.animate-marquee-right {
+  will-change: transform;
+}
+
+@keyframes aurora-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(2%, -3%, 0) scale(1.06);
+  }
+}
+
+.aurora-drift {
+  animation: aurora-drift 16s ease-in-out infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-slide,
+  .animate-fade-in-up,
+  .animate-float-slow,
+  .animate-float-slower,
+  .animate-float-img,
+  .animate-float-img-delayed,
+  .animate-marquee-left,
+  .animate-marquee-right,
+  .aurora-drift {
+    animation: none !important;
+  }
 }
 
 @keyframes slide {
@@ -43,11 +86,9 @@ body {
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 

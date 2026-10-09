@@ -3,18 +3,27 @@ import Footer from "@/components/Footer";
 import { SlideUpText } from "@/components/SlideUpText";
 import { TextReveal } from "@/components/TextReveal";
 import { ServiceHero } from "@/components/ServiceHero";
-import { Metadata } from "next";
+import SmoothVideo from "@/components/SmoothVideo";
 import Link from "next/link";
 import Image from "next/image";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbJsonLd, pageMetadata, seoPages, serviceJsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Branding | Services | Dark Media",
-  description: "Branding and Identity services by Dark Media.",
-};
+export const metadata = pageMetadata(seoPages.branding);
 
 export default function BrandingPage() {
   return (
     <div className="flex flex-col min-h-screen bg-white font-sans text-[#111111]">
+      <JsonLd
+        data={[
+          serviceJsonLd(seoPages.branding, "Branding and Identity"),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: "Branding", path: "/services/branding" },
+          ]),
+        ]}
+      />
       <Navbar />
       
       <main className="w-full flex-grow pt-24 md:pt-28 pb-8 md:pb-12">
@@ -96,16 +105,10 @@ export default function BrandingPage() {
             <div className="w-full lg:w-5/12 shrink-0">
               <div className="w-full aspect-[4/5] bg-gray-100 rounded-[2.5rem] overflow-hidden relative shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] group">
                  <div className="absolute inset-0 bg-[#11132d]/10 z-10 transition-opacity duration-500 group-hover:opacity-0 pointer-events-none"></div>
-                 <video autoPlay 
-                  loop 
-                  muted 
-                  playsInline
+                 <SmoothVideo
+                  src="https://www.mydbucket.com/wp-content/uploads/2024/10/wave.mp4"
                   className="absolute inset-0 w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
-                 preload="none">
-                  <source src="https://www.mydbucket.com/wp-content/uploads/2024/10/wave.mp4" type="video/mp4" />
-                
-          <track kind="captions" srcLang="en" label="English" default />
-        </video>
+                 />
               </div>
             </div>
 

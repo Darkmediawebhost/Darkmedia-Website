@@ -69,7 +69,7 @@ const TiltCard = ({ service, index }: { service: any, index: number }) => {
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 1, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.7, delay: index * 0.15 }}
@@ -116,7 +116,7 @@ export default function AllServicesGrid() {
 
       <div className="max-w-[1400px] w-full mx-auto px-6 md:px-12 text-center mb-24 relative z-10">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 1, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function ServicesSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -39,8 +39,8 @@ export default function ServicesSection() {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-10px); }
         }
-        .animate-float-slow { animation: float 15s infinite ease-in-out; }
-        .animate-float-slower { animation: float 20s infinite ease-in-out reverse; }
+        .animate-float-slow { animation: float 15s infinite ease-in-out; will-change: transform; }
+        .animate-float-slower { animation: float 20s infinite ease-in-out reverse; will-change: transform; }
         .animate-float-img { animation: float-img 6s ease-in-out infinite; }
         .animate-float-img-delayed { animation: float-img 7s ease-in-out infinite 1s; }
       `}</style>

@@ -2,6 +2,7 @@
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SmoothVideo from "@/components/SmoothVideo";
 
 export default function ContactUs() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -32,22 +33,16 @@ export default function ContactUs() {
       <main className="flex-grow pt-28 pb-20">
         {/* Hero Section */}
         <section className="relative w-full max-w-[95%] lg:max-w-[90%] mx-auto h-[60vh] md:h-[70vh] rounded-3xl overflow-hidden mb-16">
-          <video autoPlay 
-            loop 
-            muted 
-            playsInline
+          <SmoothVideo
+            src="https://www.mydbucket.com/wp-content/uploads/2024/10/wave.mp4"
             className="absolute inset-0 w-full h-full object-cover"
-           preload="none">
-            <source src="https://www.mydbucket.com/wp-content/uploads/2024/10/wave.mp4" type="video/mp4" />
-          
-          <track kind="captions" srcLang="en" label="English" default />
-        </video>
+          />
           <div className="absolute inset-0 bg-white/80"></div>
           
           <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
               More Than Conversations.<br />
-<span className="text-transparent bg-clip-text bg-gradient-to-br from-gray-900 to-gray-600">
+<span className="text-gray-700">
                        Meaningful       Partnerships.
         </span>
             </h1>

@@ -3,6 +3,12 @@ import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+function clientLogoAlt(file: string) {
+  const name = file.replace(/\.[^.]+$/, "").replace(/\s+/g, " ").trim();
+  if (/^logo$/i.test(name)) return "Dark Media Tech client logo";
+  return `${name.replace(/\s+logo$/i, "")} logo`;
+}
+
 interface MarqueeRowProps {
   logos: string[];
   direction?: "left" | "right";
@@ -28,7 +34,8 @@ const MarqueeRow = ({ logos, direction = "left", speed = 40 }: MarqueeRowProps) 
               >
                 <Image 
                   src={`/assets/clientslogo/${logo}`} 
-                  alt={`Client Logo ${idx}`} 
+                  alt={clientLogoAlt(logo)}
+                  sizes="200px" 
                   fill 
                   className="object-contain opacity-40 grayscale hover:grayscale-0 hover:opacity-100 hover:drop-shadow-2xl transition-all duration-500 ease-out"
                 />
@@ -80,7 +87,7 @@ export default function ClientMarqueeSection() {
       
       <div className="max-w-[1400px] w-full mx-auto px-6 md:px-12 mb-20 text-center relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}

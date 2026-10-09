@@ -10,27 +10,39 @@ export default function ScrollToTop() {
   const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
+    let frame = 0;
+    let lastProgress = -1;
+    let lastVisible = false;
+
     const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const currentScroll = window.scrollY;
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+        const currentScroll = window.scrollY;
+        const progress = totalScroll > 0
+          ? Math.min(100, Math.max(0, Math.round((currentScroll / totalScroll) * 100)))
+          : 0;
+        const visible = currentScroll > 220;
 
-      if (totalScroll > 0) {
-        const progress = Math.min(Math.max((currentScroll / totalScroll) * 100, 0), 100);
-        setScrollProgress(progress);
-      }
-
-      // Show button after scrolling down 220px
-      if (currentScroll > 220) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+        if (progress !== lastProgress) {
+          lastProgress = progress;
+          setScrollProgress(progress);
+        }
+        if (visible !== lastVisible) {
+          lastVisible = visible;
+          setIsVisible(visible);
+        }
+      });
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // Initial check
+    handleScroll();
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   const scrollToTop = () => {
