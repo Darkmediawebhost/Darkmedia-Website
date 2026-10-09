@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const SITE_URL = "https://darkmedia.tech";
 export const SITE_NAME = "Dark Media Tech";
-export const OG_IMAGE_PATH = "/og-image.jpg";
+export const OG_IMAGE_PATH = "/og-image.png";
 export const LOGO_PATH = "/logo.png";
 
 export type PageSeo = {
