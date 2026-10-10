@@ -13,6 +13,7 @@ export type PageSeo = {
   path: string;
   title: string;
   description: string;
+  keywords?: string[];
 };
 
 export const seoPages = {
@@ -95,6 +96,7 @@ export function pageMetadata(page: PageSeo): Metadata {
   return {
     title: { absolute: page.title },
     description: page.description,
+    keywords: page.keywords,
     alternates: { canonical: url },
     robots,
     openGraph: {
@@ -211,7 +213,7 @@ export function webPageJsonLd(page: PageSeo, type: "WebPage" | "AboutPage" | "Co
 export function serviceJsonLd(
   page: PageSeo,
   serviceName: string,
-  areaServed: { "@type": "City" | "State" | "AdministrativeArea"; name: string } = {
+  areaServed: { "@type": "City" | "State" | "AdministrativeArea" | "Country"; name: string } = {
     "@type": "City",
     name: "Mangaluru",
   },

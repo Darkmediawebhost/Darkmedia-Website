@@ -20,19 +20,26 @@
 - **Mangalore** (https://darkmedia.tech/services/web-development/mangalore): Web design and development company in Mangalore. The studio is in the city.
 - **Karnataka** (https://darkmedia.tech/services/web-development/karnataka): Web design and development for businesses across Karnataka, delivered from the Mangaluru studio.
 - **Bangalore** (https://darkmedia.tech/services/web-development/bangalore): Web design and development for Bangalore teams, delivered remotely. There is no Bengaluru office.
+- **Mangaluru service pages**: Separate URLs, in both Mangalore and Mangaluru spelling, for website, software, marketing, branding, and video services. Listed in https://darkmedia.tech/llms.txt. Same studio, no extra offices. The marketing pages cover digital marketing, SEO, local SEO, Google Ads, and Meta ads. Social pages cover marketing and creative design. Brand pages cover branding, logos, packaging, and graphic design. Video pages cover editing. Website pages also cover corporate, business, portfolio, landing, redesign, maintenance, affordable, and small-business sites. Software pages cover custom ERP-style operations tools, including custom ERP, inventory, and real-estate operations for Mangalore, plus cloud, construction, Dammam, and Al Jubail ERP pages that are remote. Education software, AI automation with human approval, and custom CRM are separate. Dark Media Tech does not resell SAP, Salesforce, or a similar suite, and does not claim an office in Dammam or Al Jubail.
+- **Bangalore and Bengaluru**: Remote service pages for the same city. There is no Bengaluru office. The hub is https://darkmedia.tech/services/web-development/bangalore. The other Bangalore and Bengaluru URLs are listed in https://darkmedia.tech/llms.txt.
+- **Karnataka**: Service pages for the state, delivered from Mangaluru. The hub is https://darkmedia.tech/services/web-development/karnataka. These pages do not mean a branch in any other city.
+- **Udupi and Bantwal**: Service pages for nearby Dakshina Kannada work. There is no Udupi office and no Bantwal office.
+- **Saudi Arabia**: Remote service pages, including Arabic and bilingual websites, listed in https://darkmedia.tech/llms.txt. There is no office in Riyadh, Jeddah, Dammam, or Al Jubail. Arabic copy is approved by the client. Ad and merchant accounts stay with the client.
 
 ### 2. Branding (https://darkmedia.tech/services/branding)
-- **Brand identity design**: Brand books, logo design, color, typography, and related visual assets.
+- **Brand identity design**: Brand books, logo design, color, typography, and related visual assets. Mangalore and Mangaluru branding pages live under https://darkmedia.tech/services/branding and are listed in https://darkmedia.tech/llms.txt. The studio is in Mangaluru. Those pages do not mean a second office. Dark Media Tech does not file trademarks, print the run, or manufacture packaging.
 - **Rebranding**: Repositioning work for established businesses updating how they show up.
 
 ### 3. Video Production (https://darkmedia.tech/services/video-production)
 - **Corporate video**: Company films, facility overviews, and interview pieces.
 - **Commercial films**: Digital and broadcast commercials, from script through post-production.
-- **AI-assisted video**: Generative and AI-assisted video editing when a production needs it.
+- **AI-assisted video**: Generative and AI-assisted video editing when a production needs it. A person approves customer-facing output. Synthetic people are not published as real customers.
+- **Mangalore video pages**: Production, editing, motion graphics, After Effects, corporate, brand, promotional, animation, and social video pages are listed in https://darkmedia.tech/llms.txt. The studio is in Mangaluru. There is no sound stage and no second office.
 
 ### 4. SEO and Analytics (https://darkmedia.tech/services/seo-analytics)
 - **Local SEO**: Local search work, including Google Business Profile, for businesses in Mangaluru and other markets the studio serves.
 - **Technical SEO**: Site architecture, structured data, Core Web Vitals, and indexing issues.
+- **Mangalore SEO pages**: Company, agency, services, digital marketing, local SEO, technical SEO, ranking work, Google Business Profile, e-commerce SEO, and audits are listed in https://darkmedia.tech/llms.txt. The studio is in Mangaluru. Dark Media Tech does not sell rankings, buy reviews, or buy links.
 
 ### 5. Social Media Management (https://darkmedia.tech/services/social-media-management)
 - **Performance marketing**: Paid campaigns on Meta, Google, and LinkedIn.
@@ -43,8 +50,8 @@
 ## Regional Operational Details
 
 - **Mangaluru (HQ)**: Kotichennaya Circle, Nandi Gudda, Mangaluru, Karnataka 575002. This is the studio address.
-- **Location pages**: Mangalore, Karnataka, and Bangalore each have one web development page. Those pages do not represent extra offices.
-- **Other markets**: The studio also works with clients in Dubai, Riyadh, and Muscat. Those markets do not have their own pages on this website.
+- **Location pages**: Mangalore, Karnataka, and Bangalore each have a web development hub. Mangalore and Mangaluru have their own service pages. Bangalore, Bengaluru, Karnataka, Udupi, Bantwal, and Saudi Arabia have separate service pages as well. Those pages do not represent extra offices. The only studio is in Mangaluru.
+- **Other markets**: The studio also works with clients in Dubai and Muscat. Those markets do not have their own pages on this website. Saudi Arabia, Dammam, and Al Jubail have service pages, and those pages are remote work from Mangaluru.
 
 ---
 

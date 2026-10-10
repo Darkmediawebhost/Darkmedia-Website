@@ -234,6 +234,30 @@ export default function WebDevelopmentPageView({
           </section>
         )}
 
+        {content.localPages && content.localPages.length > 0 && (
+          <section className="w-full px-4 sm:px-6 lg:px-8 py-12 md:py-16 max-w-[1400px] mx-auto" aria-labelledby="local-service-pages">
+            <h2 id="local-service-pages" className="text-3xl md:text-5xl font-bold tracking-tight text-[#11132d] mb-4">
+              <SlideUpText>{content.localPagesHeading ?? "Services in Mangalore and Mangaluru"}</SlideUpText>
+            </h2>
+            <p className="text-base md:text-lg text-gray-600 font-medium leading-relaxed max-w-3xl mb-8">
+              {content.localPagesIntro ?? "The studio is in Mangaluru. Each page below covers a service people in the city search for: websites, software, marketing, branding, and video."}
+            </p>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {content.localPages.map((page) => (
+                <li key={page.href}>
+                  <Link
+                    href={page.href}
+                    className="flex items-center justify-between gap-4 h-full px-5 py-4 bg-gray-50 border border-gray-100 hover:border-[#11132d] hover:bg-white rounded-2xl transition-colors"
+                  >
+                    <span className="text-base md:text-lg font-medium text-gray-800">{page.title}</span>
+                    <span aria-hidden="true" className="text-[#11132d] shrink-0">↗</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
         <section className="w-full px-4 sm:px-6 lg:px-8 py-12 md:py-20 mt-6 md:mt-10 max-w-[1400px] mx-auto bg-gray-50 rounded-[2.5rem] mb-10 md:mb-20 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#11132d] mb-12 text-center">

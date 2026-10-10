@@ -1,5 +1,8 @@
 import type { MetadataRoute } from "next";
 import { absoluteUrl, seoPages } from "@/lib/seo";
+import { brandingSeoPages } from "@/lib/branding-pages";
+import { seoAnalyticsPages } from "@/lib/seo-analytics-pages";
+import { videoSeoPages } from "@/lib/video-pages";
 import { webDevelopmentLocations } from "@/lib/web-development-locations";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -10,6 +13,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: page.path === "/" ? 1 : page.path === "/services" || page.path === "/contact-us" ? 0.9 : 0.8,
     })),
     ...webDevelopmentLocations.map((page) => ({
+      url: absoluteUrl(page.seo.path),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+    ...brandingSeoPages.map((page) => ({
+      url: absoluteUrl(page.seo.path),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+    ...videoSeoPages.map((page) => ({
+      url: absoluteUrl(page.seo.path),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+    ...seoAnalyticsPages.map((page) => ({
       url: absoluteUrl(page.seo.path),
       changeFrequency: "monthly" as const,
       priority: 0.7,

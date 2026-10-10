@@ -1,11 +1,15 @@
 import type { PageSeo } from "@/lib/seo";
+import { seoServicePages } from "@/lib/web-development-seo-pages";
+import { moreSeoServicePages } from "@/lib/web-development-seo-pages-more";
+import { regionSeoPages } from "@/lib/web-development-region-pages";
+import { erpSeoPages } from "@/lib/web-development-erp-pages";
 
 export type ServiceLink = { title: string; href: string };
 export type TextBlock = { title: string; desc: string };
 export type FaqItem = { question: string; answer: string };
 
 export type AreaServed = {
-  "@type": "City" | "State" | "AdministrativeArea";
+  "@type": "City" | "State" | "AdministrativeArea" | "Country";
   name: string;
 };
 
@@ -33,11 +37,15 @@ export type WebDevelopmentContent = {
   faqs?: FaqItem[];
   breadcrumb?: { name: string; path: string }[];
   services: ServiceLink[];
+  localPages?: ServiceLink[];
+  localPagesHeading?: string;
+  localPagesIntro?: string;
 };
 
 export type WebDevelopmentLocation = {
   slug: string;
   name: string;
+  market?: "mangalore" | "bangalore" | "karnataka" | "udupi" | "bantwal" | "saudi";
   seo: PageSeo;
   serviceName: string;
   areaServed: AreaServed;
@@ -82,7 +90,7 @@ function crumbs(name: string, path: string) {
   ];
 }
 
-export const webDevelopmentLocations: WebDevelopmentLocation[] = [
+const cityLocationPages: WebDevelopmentLocation[] = [
   {
     slug: "mangalore",
     name: "Mangalore",
@@ -91,6 +99,14 @@ export const webDevelopmentLocations: WebDevelopmentLocation[] = [
       title: "Website Development Company in Mangalore | Dark Media",
       description:
         "Website development company in Mangalore. Dark Media Tech designs and builds business websites, online stores, and custom web applications from our Mangaluru studio.",
+      keywords: [
+        "website development company in Mangalore",
+        "web development company in Mangalore",
+        "website developers in Mangalore",
+        "web design and development in Mangalore",
+        "Mangalore website development company",
+        "business website development Mangalore",
+      ],
     },
     serviceName: "Web Design and Development in Mangalore",
     areaServed: { "@type": "City", name: "Mangaluru" },
@@ -211,6 +227,14 @@ export const webDevelopmentLocations: WebDevelopmentLocation[] = [
       title: "Website Development Company in Karnataka | Dark Media",
       description:
         "Website development company in Karnataka. Dark Media Tech designs and builds business websites, online stores, and custom web applications from our Mangaluru studio.",
+      keywords: [
+        "website development company in Karnataka",
+        "web development company in Karnataka",
+        "website developers in Karnataka",
+        "Karnataka website development",
+        "web design company Karnataka",
+        "business website Karnataka",
+      ],
     },
     serviceName: "Web Design and Development in Karnataka",
     areaServed: { "@type": "State", name: "Karnataka" },
@@ -331,6 +355,14 @@ export const webDevelopmentLocations: WebDevelopmentLocation[] = [
       title: "Website Development Company in Bangalore | Dark Media",
       description:
         "Website development company in Bangalore. Dark Media Tech designs and builds business websites, online stores, and custom web applications for Bengaluru teams.",
+      keywords: [
+        "website development company in Bangalore",
+        "web development company in Bangalore",
+        "website developers in Bangalore",
+        "Bangalore website development company",
+        "web design company Bangalore",
+        "Bengaluru website development",
+      ],
     },
     serviceName: "Web Design and Development in Bangalore",
     areaServed: { "@type": "City", name: "Bengaluru" },
@@ -448,6 +480,84 @@ export const webDevelopmentLocations: WebDevelopmentLocation[] = [
       services: locationServices("bangalore"),
     },
   },
+];
+
+const mangaloreSeoPages = [...seoServicePages, ...moreSeoServicePages, ...erpSeoPages];
+
+export const mangaloreKeywordLinks: ServiceLink[] = [
+  { title: "Website Development Company in Mangalore", href: "/services/web-development/mangalore" },
+  ...mangaloreSeoPages.map((page) => ({ title: page.serviceName, href: page.seo.path })),
+];
+
+const marketLinks: Record<NonNullable<WebDevelopmentLocation["market"]>, ServiceLink[]> = {
+  mangalore: mangaloreKeywordLinks,
+  bangalore: [
+    { title: "Website Development Company in Bangalore", href: "/services/web-development/bangalore" },
+    ...regionSeoPages.filter((page) => page.market === "bangalore").map((page) => ({ title: page.serviceName, href: page.seo.path })),
+  ],
+  karnataka: [
+    { title: "Website Development Company in Karnataka", href: "/services/web-development/karnataka" },
+    ...regionSeoPages.filter((page) => page.market === "karnataka").map((page) => ({ title: page.serviceName, href: page.seo.path })),
+  ],
+  udupi: regionSeoPages.filter((page) => page.market === "udupi").map((page) => ({ title: page.serviceName, href: page.seo.path })),
+  bantwal: regionSeoPages.filter((page) => page.market === "bantwal").map((page) => ({ title: page.serviceName, href: page.seo.path })),
+  saudi: regionSeoPages.filter((page) => page.market === "saudi").map((page) => ({ title: page.serviceName, href: page.seo.path })),
+};
+
+const marketIntro: Record<NonNullable<WebDevelopmentLocation["market"]>, { heading: string; intro: string }> = {
+  mangalore: {
+    heading: "Services in Mangalore and Mangaluru",
+    intro: "The studio is in Mangaluru. Each page below covers a service people in the city search for: websites, software, marketing, branding, and video.",
+  },
+  bangalore: {
+    heading: "Services in Bangalore and Bengaluru",
+    intro: "Bangalore and Bengaluru are one city. These projects are remote. The only studio is in Mangaluru, and there is no Bengaluru office.",
+  },
+  karnataka: {
+    heading: "Services in Karnataka",
+    intro: "Karnataka work runs from one studio in Mangaluru. These pages do not mean a branch in any other city.",
+  },
+  udupi: {
+    heading: "Services in Udupi",
+    intro: "Udupi projects are handled from our Mangaluru studio. There is no Udupi office.",
+  },
+  bantwal: {
+    heading: "Services in Bantwal",
+    intro: "Bantwal is in Dakshina Kannada, near Mangaluru. There is no Bantwal office. The studio is at Nandi Gudda.",
+  },
+  saudi: {
+    heading: "Services for Saudi Arabia",
+    intro: "Saudi Arabia projects, including Dammam and Al Jubail, are delivered remotely from Mangaluru. There is no office in Riyadh, Jeddah, Dammam, or Al Jubail.",
+  },
+};
+
+function marketOf(page: WebDevelopmentLocation): NonNullable<WebDevelopmentLocation["market"]> {
+  if (page.market) return page.market;
+  if (page.slug === "bangalore") return "bangalore";
+  if (page.slug === "karnataka") return "karnataka";
+  return "mangalore";
+}
+
+function withLocalPages(page: WebDevelopmentLocation): WebDevelopmentLocation {
+  const market = marketOf(page);
+  const copy = marketIntro[market];
+  return {
+    ...page,
+    content: {
+      ...page.content,
+      localPagesHeading: copy.heading,
+      localPagesIntro: copy.intro,
+      localPages: marketLinks[market].filter((link) => link.href !== page.seo.path),
+    },
+  };
+}
+
+export const webDevelopmentLocations: WebDevelopmentLocation[] = [
+  ...cityLocationPages.map((page) =>
+    page.slug === "mangalore" || page.slug === "bangalore" || page.slug === "karnataka" ? withLocalPages(page) : page,
+  ),
+  ...mangaloreSeoPages.map(withLocalPages),
+  ...regionSeoPages.map(withLocalPages),
 ];
 
 export function getWebDevelopmentLocation(slug: string) {
