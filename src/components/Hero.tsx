@@ -75,7 +75,7 @@ export default function Hero() {
         {/* Subtitle - Clean instant paint */}
         <div className="mt-8 text-lg sm:text-xl md:text-2xl text-gray-600 font-medium max-w-3xl">
           <p>
-            Dark Media Tech builds brands, websites, software, and video for companies in Mangalore. We also take on AI automation, e-commerce, and digital marketing when the project calls for it.
+            Dark Media Tech builds brands, websites, software, and video for companies in Mangalore. We also take on AI automation, <span className="whitespace-nowrap">e-commerce</span>, and digital marketing when the project calls for it.
           </p>
         </div>
 
